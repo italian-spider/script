@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-address = input('Enter ip address / prefix length: \n')
+address = input('Enter ip address / prefix length: ')
 oct1 = int(address[0:address.find('.')])
 ns = address.find('.') + 1
 address = address[ns:]
@@ -15,12 +15,34 @@ ns = address.find('/') + 1
 address = address[ns:]
 mask = int(address)
 
-print("#" * 40)
+# editing to binary view
+b_oct1 = str(bin(oct1))
+b_oct1 = b_oct1[b_oct1.find('b') + 1:]
+b_oct1 = '0000000' + b_oct1
+b_oct1 = b_oct1[-8:]
+
+b_oct2 = str(bin(oct2))
+b_oct2 = b_oct2[b_oct2.find('b') + 1:]
+b_oct2 = '0000000' + b_oct2
+b_oct2 = b_oct2[-8:]
+
+b_oct3 = str(bin(oct3))
+b_oct3 = b_oct3[b_oct3.find('b') + 1:]
+b_oct3 = '0000000' + b_oct3
+b_oct3 = b_oct3[-8:]
+
+b_oct4 = str(bin(oct4))
+b_oct4 = b_oct4[b_oct4.find('b') + 1:]
+b_oct4 = '0000000' + b_oct4
+b_oct4 = b_oct4[-8:]
+
+#print("#" * 40)
 print('Network:')
 print(oct1, oct2, oct3, oct4)
 print('Binary view:')
-print('{:b} {:b} {:b} {:b}'.format(oct1, oct2, oct3, oct4))
-print("#" * 40)
+print(b_oct1, b_oct2, b_oct3, b_oct4)
+#print('{:b} {:b} {:b} {:b}'.format(oct1, oct2, oct3, oct4))
+#print("#" * 40)
 #mask = int(input('Enter prefix length: '))
 dobav = 32 - mask
 bin_mask = '1' * mask
