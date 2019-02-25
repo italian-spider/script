@@ -1,6 +1,20 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.6
 
-address = input('Enter ip address / prefix length: ')
+# simple input address
+#address = input('Enter ip address / prefix length: ')
+# Check format input
+a = 0
+while a != 1:
+    address = input('Enter ip in format: ')
+    if address.count('.') != 3:
+        print('Wrong format')
+    elif address.count('/') != 1:
+        print('Wrong format')
+    else:
+        print('Correct format')
+        a = 1
+
+
 oct1 = int(address[0:address.find('.')])
 ns = address.find('.') + 1
 address = address[ns:]
