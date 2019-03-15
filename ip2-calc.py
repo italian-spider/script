@@ -1,7 +1,21 @@
 #!/usr/bin/env python3.6
 
-# simple input address
-#address = input('Enter ip address / prefix length: ')
+# Function Block
+def create_octet_ls( addr_str ):
+     """Razbivka binarnoi stroki na octety i vyvod spiska """
+     list_octets = []
+     list_octets.append(addr_str[0:8])
+     list_octets.append(addr_str[8:16])
+     list_octets.append(addr_str[16:24])
+     list_octets.append(addr_str[24:32])
+     return list_octets
+#
+def ls_binTodec (listoctet):
+     """Bin spisok octetov to dec spisok i vyvod spiska"""
+     rezdec = []
+     for i in range(4):
+         rezdec.append(int(listoctet[i], 2))
+     return rezdec
 # Check format input
 a = 0
 while a != 1:
@@ -41,11 +55,7 @@ host_range = bin_net
 c_dbv = 32 - mask
 dbv = '0' * c_dbv
 bin_net = bin_net + dbv
-l_net_b = []
-l_net_b.append(bin_net[0:8])
-l_net_b.append(bin_net[8:16])
-l_net_b.append(bin_net[16:24])
-l_net_b.append(bin_net[24:32])
+l_net_b = create_octet_ls(bin_net)
 #detect_class
 if int(l_addr_str[0]) <= 127:
 	detect_cl = 'A'
@@ -64,52 +74,22 @@ dbv2 = '1' * c_dbv
 host_min = host_range + dbv1
 host_max = host_range + dbv2
 #
-l_host_max_b = []
-l_host_max_b.append(host_max[0:8])
-l_host_max_b.append(host_max[8:16])
-l_host_max_b.append(host_max[16:24])
-l_host_max_b.append(host_max[24:32])
+l_host_max_b = create_octet_ls(host_max)
 #
-l_host_max_d = []
-l_host_max_d.append(int(l_host_max_b[0], 2))
-l_host_max_d.append(int(l_host_max_b[1], 2))
-l_host_max_d.append(int(l_host_max_b[2], 2))
-l_host_max_d.append(int(l_host_max_b[3], 2))
+l_host_max_d = ls_binTodec(l_host_max_b)
 #
-l_host_min_b = []
-l_host_min_b.append(host_min[0:8])
-l_host_min_b.append(host_min[8:16])
-l_host_min_b.append(host_min[16:24])
-l_host_min_b.append(host_min[24:32])
+l_host_min_b = create_octet_ls(host_min)
 #
-l_host_min_d = []
-l_host_min_d.append(int(l_host_min_b[0], 2))
-l_host_min_d.append(int(l_host_min_b[1], 2))
-l_host_min_d.append(int(l_host_min_b[2], 2))
-l_host_min_d.append(int(l_host_min_b[3], 2))
+l_host_min_d = ls_binTodec(l_host_min_b)
 #
-l_net_dec = []
-l_net_dec.append(int(l_net_b[0], 2))
-l_net_dec.append(int(l_net_b[1], 2))
-l_net_dec.append(int(l_net_b[2], 2))
-l_net_dec.append(int(l_net_b[3], 2))
+l_net_dec = ls_binTodec(l_net_b)
 #
 #config prefix mask
 dobav = 32 - mask
 bin_mask = '1' * mask
 bin_mask = bin_mask + '0' * dobav
-l_mask_b = []
-l_mask_d = []
-l_mask_b.append(bin_mask[0:8])
-l_mask_d.append(int(bin_mask[0:8], 2))
-l_mask_b.append(bin_mask[8:16])
-l_mask_d.append(int(bin_mask[8:16], 2))
-l_mask_b.append(bin_mask[16:24])
-l_mask_d.append(int(bin_mask[16:24], 2))
-l_mask_b.append(bin_mask[24:32])
-l_mask_d.append(int(bin_mask[24:32], 2))
-#
-#st = '.'.join([ str(l_addr_str) for l_addr_str in l_addr_str ]) + ' | ' + '.'.join([ str(l_addr_b) for l_addr_b in l_addr_b ])
+l_mask_b = create_octet_ls(bin_mask)
+l_mask_d = ls_binTodec(l_mask_b)
 #
 #Formirovanie vyvoda calculatora
 #
@@ -156,18 +136,5 @@ print('Network class:')
 print(detect_cl)
 print('-' * 56)
 
-"""#print('{:b} {:b} {:b} {:b}'.format(oct1, oct2, oct3, oct4))
-#print("#" * 40)
-#mask = int(input('Enter prefix length: '))
-dobav = 32 - mask
-bin_mask = '1' * mask
-bin_mask = bin_mask + '0' * dobav
-mask_oct1 = bin_mask[0:8]
-mask_oct2 = bin_mask[8:16]
-mask_oct3 = bin_mask[16:24]
-mask_oct4 = bin_mask[24:32]
-print('Mask:')
-print(int(mask_oct1, 2), int(mask_oct2, 2), int(mask_oct3, 2), int(mask_oct4, 2))
-print('Binary view:')
-print(mask_oct1, mask_oct2, mask_oct3, mask_oct4)"""
+#print('{:b} {:b} {:b} {:b}'.format(oct1, oct2, oct3, oct4))
 
