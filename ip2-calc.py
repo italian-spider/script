@@ -71,6 +71,7 @@ else: detect_cl = 'not classified'
 c_dbv = 32 - mask
 dbv1 = '0' * c_dbv
 dbv2 = '1' * c_dbv
+bodycount = 2**c_dbv - 2
 host_min = host_range + dbv1
 host_max = host_range + dbv2
 #
@@ -135,6 +136,8 @@ print('-' * 56)
 print('Network class:')
 print(detect_cl)
 print('-' * 56)
-
+print('Network hosts:')
+print(bodycount)
+print('-' * 56)
 #print('{:b} {:b} {:b} {:b}'.format(oct1, oct2, oct3, oct4))
 
