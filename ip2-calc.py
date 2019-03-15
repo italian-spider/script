@@ -1,6 +1,9 @@
 #!/usr/bin/env python3.6
 
 # Function Block
+"""Functiya razbivaet 32 simvolnuyu stroku na 4 po 8
+sozdaet spisok iz 4 elementov
+i v kachestve rezultata otdaet poluchennyi spisok"""
 def create_octet_ls( addr_str ):
      """Razbivka binarnoi stroki na octety i vyvod spiska """
      list_octets = []
@@ -10,16 +13,21 @@ def create_octet_ls( addr_str ):
      list_octets.append(addr_str[24:32])
      return list_octets
 #
+"""Functiya covertiruet spisok iz 4 octetov binarnyh v spisok
+iz 4 decad
+vydaet v rezultate spisok"""
 def ls_binTodec (listoctet):
      """Bin spisok octetov to dec spisok i vyvod spiska"""
      rezdec = []
      for i in range(4):
          rezdec.append(int(listoctet[i], 2))
      return rezdec
+#####################################################################
+# Programma
 # Check format input
 a = 0
 while a != 1:
-    address = input('Enter ip in format: ')
+    address = input('Enter ip in format (W.X.Y.Z/N): ')
     if address.count('.') != 3:
         print('Wrong format')
     elif address.count('/') != 1:
